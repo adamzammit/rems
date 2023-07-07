@@ -29,7 +29,7 @@ executors:
 jobs:
   deps:
     executor: clojure
-    resource_class: large
+    resource_class: adamzammit/adamtest
     steps:
       - checkout
       - restore_cache:
@@ -87,7 +87,7 @@ jobs:
 
   browser-test:
     executor: db
-    resource_class: large
+    resource_class: adamzammit/adamtest
     parallelism: 4
     steps:
       - browser-tools/install-chrome
