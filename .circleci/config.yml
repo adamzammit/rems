@@ -119,7 +119,9 @@ jobs:
       - checkout
       - restore_cache:
           key: *cache-key
-      - run: lein with-profile uberjar uberjar # fix a bug in leiningen 2.9.9-2.9.10, fix in 2.9.11
+      - run:
+          no_output_timeout: 30m
+          command: lein with-profile uberjar uberjar # fix a bug in leiningen 2.9.9-2.9.10, fix in 2.9.11
       - store_artifacts:
           path: target/uberjar/rems.jar
       - persist_to_workspace:
