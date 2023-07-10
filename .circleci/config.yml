@@ -30,7 +30,7 @@ executors:
 jobs:
   deps:
     executor: clojure
-    resource_class: adamzammit/adamtest
+    resource_class: adamzammit/adamtestdocker
     steps:
       - setup_remote_docker:
           docker_layer_caching: false
@@ -73,7 +73,7 @@ jobs:
 
   cljfmt:
     executor: clojure
-    resource_class: adamzammit/adamtest
+    resource_class: adamzammit/adamtestdocker
     steps:
       - setup_remote_docker:
           docker_layer_caching: false
@@ -84,7 +84,7 @@ jobs:
 
   integration-test:
     executor: db
-    resource_class: adamzammit/adamtest
+    resource_class: adamzammit/adamtestdocker
     steps:
       - setup_remote_docker:
           docker_layer_caching: false
@@ -97,7 +97,7 @@ jobs:
 
   browser-test:
     executor: db
-    resource_class: adamzammit/adamtest
+    resource_class: adamzammit/adamtestdocker
     parallelism: 4
     steps:
       - setup_remote_docker:
@@ -122,7 +122,7 @@ jobs:
 
   build:
     executor: clojure
-    resource_class: adamzammit/adamtest
+    resource_class: adamzammit/adamtestdocker
     steps:
       - setup_remote_docker:
           docker_layer_caching: false
