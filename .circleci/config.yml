@@ -4,8 +4,8 @@ version: 2.1
 # TODO: use docker executor and setup_remote_docker for these builds.
 defaults: &defaults
   resource_class: adamzammit/cicdmicrok8s
-  machine:
-    image: ubuntu-2004:202201-02
+  docker:
+    - image: cimg/base:current
   working_directory: ~/repo
   environment:
     LEIN_ROOT: "true"
