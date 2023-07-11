@@ -3,7 +3,7 @@ version: 2.1
 # We still use this legacy machine executor for building docker images.
 # TODO: use docker executor and setup_remote_docker for these builds.
 defaults: &defaults
-  resource_class: adamzammit/adamtest
+  resource_class: adamzammit/adamtestdocker
   machine:
     image: ubuntu-2004:202201-02
   working_directory: ~/repo
@@ -54,7 +54,7 @@ jobs:
 
   unit-test:
     executor: clojure
-    resource_class: adamzammit/adamtest
+    resource_class: adamzammit/adamtestdocker
     steps:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
