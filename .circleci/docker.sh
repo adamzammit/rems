@@ -21,6 +21,6 @@ docker build --pull \
     --tag docker-registry.cadre-rems.ada.edu.au/ada/rems:${tag1} \
     --tag docker-registry.cadre-rems.ada.edu.au/ada/rems:${tag2} .
 
-docker login -p $dockerregpw -u docker docker-registry.cadre-rems.ada.edu.au:5000
+docker login -p $dockerregpwd -u docker docker-registry.cadre-rems.ada.edu.au:5000
 docker push docker-registry.cadre-rems.ada.edu.au/ada/rems:${tag1}
 docker push docker-registry.cadre-rems.ada.edu.au/ada/rems:${tag2}
