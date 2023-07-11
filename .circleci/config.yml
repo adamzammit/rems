@@ -3,7 +3,7 @@ version: 2.1
 # We still use this legacy machine executor for building docker images.
 # TODO: use docker executor and setup_remote_docker for these builds.
 defaults: &defaults
-  resource_class: adamzammit/adamtestdocker
+  resource_class: adamzammit/cicdmicrok8s
   machine:
     image: ubuntu-2004:202201-02
   working_directory: ~/repo
@@ -30,7 +30,7 @@ executors:
 jobs:
   deps:
     executor: clojure
-    resource_class: adamzammit/adamtestdocker
+    resource_class: adamzammit/cicdmicrok8s
     steps:
       - checkout
       - restore_cache:
@@ -54,7 +54,7 @@ jobs:
 
   unit-test:
     executor: clojure
-    resource_class: adamzammit/adamtestdocker
+    resource_class: adamzammit/cicdmicrok8s
     steps:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
@@ -71,7 +71,7 @@ jobs:
 
   cljfmt:
     executor: clojure
-    resource_class: adamzammit/adamtestdocker
+    resource_class: adamzammit/cicdmicrok8s
     steps:
       - checkout
       - restore_cache:
@@ -80,7 +80,7 @@ jobs:
 
   integration-test:
     executor: db
-    resource_class: adamzammit/adamtestdocker
+    resource_class: adamzammit/cicdmicrok8s
     steps:
       - checkout
       - restore_cache:
@@ -91,7 +91,7 @@ jobs:
 
   browser-test:
     executor: db
-    resource_class: adamzammit/adamtestdocker
+    resource_class: adamzammit/cicdmicrok8s
     parallelism: 4
     steps:
       - browser-tools/install-chrome
@@ -114,7 +114,7 @@ jobs:
 
   build:
     executor: clojure
-    resource_class: adamzammit/adamtestdocker
+    resource_class: adamzammit/cicdmicrok8s
     steps:
       - checkout
       - restore_cache:
