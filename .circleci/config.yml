@@ -130,9 +130,14 @@ jobs:
             - target/uberjar/rems.jar
 
   docker-snapshot:
-    <<: *defaults
+    resource_class: adamzammit/cicdmicrok8s
+    docker:
+      - image: cimg/base:current
+    working_directory: ~/repo
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - attach_workspace:
           at: .
       - run: .circleci/docker.sh circle
