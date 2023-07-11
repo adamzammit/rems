@@ -1,12 +1,10 @@
 version: 2.1
 
-# We still use this legacy machine executor for building docker images.
-# TODO: use docker executor and setup_remote_docker for these builds.
+# We still use this legacy machine executor for building docker images due to circleci not supporting inside containers
 defaults: &defaults
-  resource_class: adamzammit/cicdmicrok8s
-  docker:
-    - image: cimg/base:current
+  resource_class: adamzammit/cicdmachine
   working_directory: ~/repo
+  machine: true
   environment:
     LEIN_ROOT: "true"
     # Customize the JVM maximum heap limit
@@ -17,8 +15,7 @@ orbs:
 
 executors:
   builder:
-    docker:
-      - image: cimg/base:current
+    machine: true
   clojure:
     docker:
       - image: cimg/clojure:1.11.1-browsers
@@ -133,13 +130,9 @@ jobs:
             - target/uberjar/rems.jar
 
   docker-snapshot:
-    executor: builder
-    resource_class: adamzammit/cicdmicrok8s
-    working_directory: ~/repo
+    <<: *defaults
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - attach_workspace:
           at: .
       - run: .circleci/docker.sh circle
